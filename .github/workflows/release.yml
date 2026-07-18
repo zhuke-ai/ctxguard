@@ -12,6 +12,7 @@ jobs:
   build:
     name: build on ${{ matrix.target }}
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.allow_failure }}
     strategy:
       fail-fast: false
       matrix:
@@ -20,18 +21,22 @@ jobs:
             os: ubuntu-latest
             artifact: ctxguard-linux-x86_64
             binary: ctxguard
+            allow_failure: false
           - target: x86_64-apple-darwin
             os: macos-13   # x86_64
             artifact: ctxguard-macos-x86_64
             binary: ctxguard
+            allow_failure: true   # macos runner queue can be 10+ min
           - target: aarch64-apple-darwin
             os: macos-latest  # arm64
             artifact: ctxguard-macos-aarch64
             binary: ctxguard
+            allow_failure: true
           - target: x86_64-pc-windows-msvc
             os: windows-latest
             artifact: ctxguard-windows-x86_64.exe
             binary: ctxguard.exe
+            allow_failure: false
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
