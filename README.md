@@ -13,6 +13,16 @@
 [![crates.io](https://img.shields.io/crates/v/ctxguard.svg)](https://crates.io/crates/ctxguard)
 [![Rust](https://img.shields.io/badge/rust-1.74%2B-orange.svg)](https://www.rust-lang.org)
 
+## Supported agents
+
+| tool | flag | session path |
+|---|---|---|
+| Claude Code | `--tool claude` (default) | `~/.claude/projects/<proj>/<sid>.jsonl` |
+| OpenAI Codex CLI | `--tool codex` | `~/.codex/archived_sessions/rollout-*.jsonl` |
+| Aider | — (planned v0.3) | `~/.aider.chat.history.md` |
+
+`ctxguard` is the first context-window budget tool that works across multiple AI coding agents.
+
 ## Why
 
 A typical 30-minute Claude Code session re-reads `auth.ts` 30 times. prompt caching hides this
